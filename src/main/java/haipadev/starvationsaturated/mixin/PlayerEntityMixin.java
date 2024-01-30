@@ -21,7 +21,7 @@ public abstract class PlayerEntityMixin {
      */
     @ModifyExpressionValue(method = "tickMovement", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/World;getDifficulty()Lnet/minecraft/world/Difficulty;"),allow=1)
     private Difficulty starvationsaturated$peacefulCheck(Difficulty original) {
-        if(original==Difficulty.PEACEFUL && ModConfig.INSTANCE.peacefulHugerValues.enablePeacefulHunger){return Difficulty.NORMAL;}
+        if(original==Difficulty.PEACEFUL && ModConfig.INSTANCE.enablePeacefulHunger){return Difficulty.NORMAL;}
         return original;
     }
 }

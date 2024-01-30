@@ -27,21 +27,18 @@
   "text.autoconfig.starvationsaturated.option.hungerFastRegenOverride.@Tooltip": "Hunger level for fast regen (1 so its not gonna weirdly heal you with leftover saturation, vanilla is 20)",
 
 
+  "text.autoconfig.starvationsaturated.option.enablePeacefulHunger": "Enable Peaceful Hunger",
+  "text.autoconfig.starvationsaturated.option.enablePeacefulHunger.@Tooltip": "Skip check for PEACEFUL that gives free hunger regeneration",
+
   "text.autoconfig.starvationsaturated.option.peacefulHugerValues": "Peaceful Hunger Values",
 
   "text.autoconfig.starvationsaturated.option.peacefulHugerValues.saturationHealRate": "Saturation heal rate",
   "text.autoconfig.starvationsaturated.option.peacefulHugerValues.saturationHealRate.@Tooltip": "The amount of ticks it takes to fast-heal, 0 means instant (vanilla is 10)",
-
-  "text.autoconfig.starvationsaturated.option.peacefulHugerValues.enablePeacefulHunger": "Enable Peaceful Hunger",
-  "text.autoconfig.starvationsaturated.option.peacefulHugerValues.enablePeacefulHunger.@Tooltip": "Skip check for PEACEFUL that gives free hunger regeneration",
-
-  "text.autoconfig.starvationsaturated.option.peacefulHugerValues.starveDamage": "Peaceful Starve Damage",
+  "text.autoconfig.starvationsaturated.option.peacefulHugerValues.starveDamage": "Starve Damage",
   "text.autoconfig.starvationsaturated.option.peacefulHugerValues.starveDamage.@Tooltip": "How much starvation damage to deal on PEACEFUL",
-
-  "text.autoconfig.starvationsaturated.option.peacefulHugerValues.starveDamageRate": "Peaceful Starve Damage Rate",
+  "text.autoconfig.starvationsaturated.option.peacefulHugerValues.starveDamageRate": "Starve Damage Rate",
   "text.autoconfig.starvationsaturated.option.peacefulHugerValues.starveDamageRate.@Tooltip": "How fast starvation damage occurs on PEACEFUL",
-
-  "text.autoconfig.starvationsaturated.option.peacefulHugerValues.dealStarveDamageTill": "Peaceful Starve Damage Till",
+  "text.autoconfig.starvationsaturated.option.peacefulHugerValues.dealStarveDamageTill": "Starve Damage Till",
   "text.autoconfig.starvationsaturated.option.peacefulHugerValues.dealStarveDamageTill.@Tooltip": "How low should you get before starvation stops taking effect on PEACEFUL",
 
 
@@ -49,14 +46,11 @@
 
   "text.autoconfig.starvationsaturated.option.easyHugerValues.saturationHealRate": "Saturation heal rate",
   "text.autoconfig.starvationsaturated.option.easyHugerValues.saturationHealRate.@Tooltip": "The amount of ticks it takes to fast-heal, 0 means instant (vanilla is 10)",
-
-  "text.autoconfig.starvationsaturated.option.easyHugerValues.starveDamage": "Easy Starve Damage",
+  "text.autoconfig.starvationsaturated.option.easyHugerValues.starveDamage": "Starve Damage",
   "text.autoconfig.starvationsaturated.option.easyHugerValues.starveDamage.@Tooltip": "How much starvation damage to deal on EASY",
-
-  "text.autoconfig.starvationsaturated.option.easyHugerValues.starveDamageRate": "Easy Starve Damage Rate",
+  "text.autoconfig.starvationsaturated.option.easyHugerValues.starveDamageRate": "Starve Damage Rate",
   "text.autoconfig.starvationsaturated.option.easyHugerValues.starveDamageRate.@Tooltip": "How fast starvation damage occurs on EASY",
-
-  "text.autoconfig.starvationsaturated.option.easyHugerValues.dealStarveDamageTill": "Easy Starve Damage Till",
+  "text.autoconfig.starvationsaturated.option.easyHugerValues.dealStarveDamageTill": "Starve Damage Till",
   "text.autoconfig.starvationsaturated.option.easyHugerValues.dealStarveDamageTill.@Tooltip": "How low should you get before starvation stops taking effect on EASY (vanilla is 10)",
 
 
@@ -64,14 +58,11 @@
 
   "text.autoconfig.starvationsaturated.option.normalHugerValues.saturationHealRate": "Saturation heal rate",
   "text.autoconfig.starvationsaturated.option.normalHugerValues.saturationHealRate.@Tooltip": "The amount of ticks it takes to fast-heal, 0 means instant (vanilla is 10)",
-
-  "text.autoconfig.starvationsaturated.option.normalHugerValues.starveDamage": "Normal Starve Damage",
+  "text.autoconfig.starvationsaturated.option.normalHugerValues.starveDamage": "Starve Damage",
   "text.autoconfig.starvationsaturated.option.normalHugerValues.starveDamage.@Tooltip": "How much starvation damage to deal on NORMAL",
-
-  "text.autoconfig.starvationsaturated.option.normalHugerValues.starveDamageRate": "Normal Starve Damage Rate",
+  "text.autoconfig.starvationsaturated.option.normalHugerValues.starveDamageRate": "Starve Damage Rate",
   "text.autoconfig.starvationsaturated.option.normalHugerValues.starveDamageRate.@Tooltip": "How fast starvation damage occurs on NORMAL",
-
-  "text.autoconfig.starvationsaturated.option.normalHugerValues.dealStarveDamageTill": "Normal Starve Damage Till",
+  "text.autoconfig.starvationsaturated.option.normalHugerValues.dealStarveDamageTill": "Starve Damage Till",
   "text.autoconfig.starvationsaturated.option.normalHugerValues.dealStarveDamageTill.@Tooltip": "How low should you get before starvation stops taking effect on NORMAL (vanilla is 1)",
 
 
@@ -79,13 +70,10 @@
 
   "text.autoconfig.starvationsaturated.option.hardHungerValues.saturationHealRate": "Saturation heal rate",
   "text.autoconfig.starvationsaturated.option.hardHungerValues.saturationHealRate.@Tooltip": "The amount of ticks it takes to fast-heal, 0 means instant (vanilla is 10)",
-
-  "text.autoconfig.starvationsaturated.option.hardHungerValues.starveDamage": "Hard Starve Damage",
+  "text.autoconfig.starvationsaturated.option.hardHungerValues.starveDamage": "Starve Damage",
   "text.autoconfig.starvationsaturated.option.hardHungerValues.starveDamage.@Tooltip": "How much starvation damage to deal on HARD",
-
-  "text.autoconfig.starvationsaturated.option.hardHungerValues.starveDamageRate": "Hard Starve Damage Rate",
+  "text.autoconfig.starvationsaturated.option.hardHungerValues.starveDamageRate": "Starve Damage Rate",
   "text.autoconfig.starvationsaturated.option.hardHungerValues.starveDamageRate.@Tooltip": "How fast starvation damage occurs on HARD",
-
-  "text.autoconfig.starvationsaturated.option.hardHungerValues.dealStarveDamageTill": "Hard Starve Damage Till",
+  "text.autoconfig.starvationsaturated.option.hardHungerValues.dealStarveDamageTill": "Starve Damage Till",
   "text.autoconfig.starvationsaturated.option.hardHungerValues.dealStarveDamageTill.@Tooltip": "How low should you get before starvation stops taking effect on HARD (vanilla is 1)"
 }

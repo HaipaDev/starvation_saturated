@@ -1,5 +1,6 @@
 package haipadev.starvationsaturated;
 
+import haipadev.starvationsaturated.helpers.ModConfigHelper;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.loader.api.FabricLoader;
@@ -9,7 +10,6 @@ import net.minecraft.util.Util;
 public class StarvationSaturatedClient implements ClientModInitializer {
 	@Override
 	public void onInitializeClient() {
-        ModConfig.init();
 		//ClientTickEvents.END_CLIENT_TICK.register(this::clientTick);
 	}
 //
