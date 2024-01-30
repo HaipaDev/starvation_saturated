@@ -18,7 +18,8 @@ public class AppleSkin_HUDOverlayHandlerMixin {
      * @author haipadev
      * @reason Uncap saturation gained overlay from hunger
      */
-    @ModifyArg(method = "onRender", at = @At(value = "INVOKE", target="Lsqueek/appleskin/client/HUDOverlayHandler;drawSaturationOverlay(Lsqueek/appleskin/api/event/HUDOverlayEvent$Saturation;Lnet/minecraft/client/MinecraftClient;FF)V"),index=2)
+    @ModifyArg(method = "onRender", at = @At(value = "INVOKE", target="Lsqueek/appleskin/client/HUDOverlayHandler;drawSaturationOverlay(Lsqueek/appleskin/api/event/HUDOverlayEvent$Saturation;Lnet/minecraft/client/MinecraftClient;FF)V",ordinal=1),
+            index=2)
     private float starvationsaturated$uncapSaturationOverlayFromHunger(float saturationGained, @Local FoodValues modifiedFoodValues){
         return modifiedFoodValues.getSaturationIncrement();
     }
@@ -32,34 +33,20 @@ public class AppleSkin_HUDOverlayHandlerMixin {
         if(player.getWorld().getDifficulty()==Difficulty.PEACEFUL){return Difficulty.NORMAL;}
         return Difficulty.PEACEFUL;
     }
+
     /**
      * @author haipadev
-     * @reason Disable check for PEACEFUL
+     * @reason Disable check for 18 health
      */
     @ModifyExpressionValue(method = "shouldShowEstimatedHealth", at= @At(value = "CONSTANT", args = "intValue=18"), allow=1)
     private int starvationsaturated$ignoreCheckFor18Health(int i) {
         return 99;
     }
+
     /**
      * @author haipadev
      * @reason Make hunger shake actually happen like in vanilla - hunger below 0
      */
-//    @ModifyExpressionValue(method = "generateBarOffsets", at= @At(value = "CONSTANT", args = "floatValue=0.0"), slice=@Slice(
-//            from=@At(value="INVOKE",target="Lnet/minecraft/entity/player/PlayerEntity;getHungerManager()Lnet/minecraft/entity/player/HungerManager;")
-//    ), allow=1)
-//    @ModifyVariable(method = "generateBarOffsets", at= @At(value = "STORE", target = "Lnet/minecraft/entity/player/HungerManager;saturationLevel:F"), slice=@Slice(
-//            from=@At(value="INVOKE",target="Lnet/minecraft/entity/player/PlayerEntity;getHungerManager()Lnet/minecraft/entity/player/HungerManager;")
-//    ),ordinal = 1)
-//    @ModifyVariable(method = "generateBarOffsets", at= @At(value = "STORE", ordinal = 0), slice=@Slice(
-//            from=@At(value="INVOKE",target="Lnet/minecraft/entity/player/PlayerEntity;getHungerManager()Lnet/minecraft/entity/player/HungerManager;")
-//    ),ordinal = 0)
-//    @ModifyExpressionValue(method = "generateBarOffsets", at= @At(value = "FIELD", target = "shouldAnimatedFood"), slice=@Slice(
-//            from=@At(value="INVOKE",target="Lnet/minecraft/entity/player/PlayerEntity;getHungerManager()Lnet/minecraft/entity/player/HungerManager;")
-//    ))
-//    private float starvationsaturated$ignoreShakeCheckForSaturation(float i, @Local HungerManager hungerManager){//@Local int foodLevel) {
-////        return foodLevel;
-//        return hungerManager.getFoodLevel();
-//    }
     @Redirect(method = "generateBarOffsets", at=@At(value= "INVOKE",target = "Lnet/minecraft/entity/player/HungerManager;getSaturationLevel()F"))
     private float starvationsaturated$ignoreShakeCheckForSaturation(HungerManager hungerManager) {
         return hungerManager.getFoodLevel();

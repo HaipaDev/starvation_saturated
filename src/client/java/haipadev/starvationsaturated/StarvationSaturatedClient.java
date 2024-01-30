@@ -9,6 +9,7 @@ import net.minecraft.util.Util;
 public class StarvationSaturatedClient implements ClientModInitializer {
 	@Override
 	public void onInitializeClient() {
+        ModConfig.init();
 		//ClientTickEvents.END_CLIENT_TICK.register(this::clientTick);
 	}
 //

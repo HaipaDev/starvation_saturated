@@ -26,7 +26,7 @@ loom {
     splitEnvironmentSourceSets()
 
 	mods {
-		"modid" {
+		"starvationsaturated" {
 			sourceSet sourceSets.main
 			sourceSet sourceSets.client
 		}
@@ -48,10 +48,12 @@ dependencies {
 
 	// modImplementation "net.fabricmc.fabric-api:fabric-api-deprecated:${project.fabric_version}"
 
-//	modCompileOnly ("squeek.appleskin:appleskin-fabric:2.5.1:api")
 	modCompileOnly ("squeek.appleskin:appleskin-fabric:mc1.20-2.5.1")
-	modCompileOnly ("me.shedaniel.cloth:cloth-config-fabric:11.0.99")
-	modCompileOnly ("com.terraformersmc:modmenu:7.0.0")
+	modImplementation "com.terraformersmc:modmenu:${project.modmenu_version}"
+	modApi("me.shedaniel.cloth:cloth-config-fabric:${project.cloth_version}") {
+		exclude(group: "net.fabricmc.fabric-api")
+	}
+	include ("me.shedaniel.cloth:cloth-config-fabric:11.0.99")
 }
 
 processResources {
