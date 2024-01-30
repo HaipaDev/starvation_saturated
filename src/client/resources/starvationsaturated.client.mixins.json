@@ -1,0 +1,17 @@
+{
+	"required": false,
+	"package": "haipadev.starvationsaturated.mixin.client",
+	"compatibilityLevel": "JAVA_17",
+	"client": [
+		"AppleSkin_TooltipOverlayHandlerMixin",
+		"AppleSkin_TooltipFoodOverlayMixin",
+		"AppleSkin_FoodValuesMixin",
+		"AppleSkin_TooltipFoodOverlayInterface",
+		"AppleSkin_FoodValuesEventMixin",
+		"AppleSkin_FoodHelperMixin",
+		"AppleSkin_HUDOverlayHandlerMixin"
+	],
+	"injectors": {
+		"defaultRequire": 1
+	}
+}

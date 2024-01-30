@@ -1,1 +1,2 @@
 # starvation_saturated
+Im learning mixins (first overall coded mod), and overhauling the hunger system (+ how AppleSkin works), inspired by [this vid](https://www.youtube.com/watch?v=qymORcXbolk&ab_channel=TheLucidLetters)

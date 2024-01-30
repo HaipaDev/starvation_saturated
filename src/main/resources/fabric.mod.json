@@ -1,0 +1,42 @@
+{
+	"schemaVersion": 1,
+	"id": "starvation-saturated",
+	"version": "${version}",
+	"name": "Starvation Saturated",
+	"description": "Experience a totally saturated overhaul of the hunger system",
+	"authors": [
+		"HaipaDev"
+	],
+	"contact": {
+		"homepage": "https://haipadev.github.io",
+		"sources": "https://github.com/HyperGamesDev/starvation_saturated/",
+		"issues": "https://github.com/HaipaDev/starvation_saturated/issues"
+	},
+	"license": "CC0-1.0",
+	"icon": "assets/starvationsaturated/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+          "haipadev.starvationsaturated.StarvationSaturated"
+		],
+		"client": [
+          "haipadev.starvationsaturated.StarvationSaturatedClient"
+		]
+	},
+	"mixins": [
+		"starvationsaturated.mixins.json",
+		{
+			"config": "starvationsaturated.client.mixins.json",
+			"environment": "client"
+		}
+	],
+	"depends": {
+		"fabricloader": ">=0.14.0",
+		"minecraft": "~1.20.1",
+		"java": ">=17",
+		"fabric-api": "*"
+	},
+	"recommends": {
+		"appleskin": ">=2.5.1"
+	}
+}
