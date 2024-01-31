@@ -13,7 +13,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import squeek.appleskin.api.food.FoodValues;
 import squeek.appleskin.client.TooltipOverlayHandler;
 
-@Mixin(value= TooltipOverlayHandler.FoodOverlay.class,remap=false)
+@Mixin(value=TooltipOverlayHandler.FoodOverlay.class,remap=false)
 public class AppleSkin_TooltipFoodOverlayMixin {
     @Inject(method = "shouldRenderHungerBars", at = @At("HEAD"), cancellable = true)
     private void starvationsaturated$modifyShouldRenderHungerBars(CallbackInfoReturnable<Boolean> ci){
@@ -59,7 +59,7 @@ public class AppleSkin_TooltipFoodOverlayMixin {
      * @author HaipaDev
      * @reason When either saturation or hunger is hidden shrink the height to only 9+3
      */
-    @Inject(method = "getHeight", at = @At("HEAD"), cancellable = true)
+    @Inject(method = "getHeight", at = @At("HEAD"), cancellable = true, remap = true)
     public void starvationsaturated$getHeight(CallbackInfoReturnable<Integer> cir) {
         if(this.saturationBars==0 || this.hungerBars==0) {
             cir.setReturnValue(9+3);

@@ -19,9 +19,17 @@ public class AppleSkin_TooltipOverlayHandlerMixin {
             return y - 10;
         }
         return y;
+//        if (!callShouldRenderHungerBars(foodOverlay)) {
+//            return y;
+//        }
+//        return y-10;
     }
     @Unique
     private int getHungerBars(TooltipOverlayHandler.FoodOverlay foodOverlay){
         return ((AppleSkin_TooltipFoodOverlayInterface)foodOverlay).getHungerBars();
     }
+//    @Unique
+//    private boolean callShouldRenderHungerBars(TooltipOverlayHandler.FoodOverlay foodOverlay){
+//        return ((AppleSkin_TooltipFoodOverlayInterface)foodOverlay).callShouldRenderHungerBars();
+//    }
 }

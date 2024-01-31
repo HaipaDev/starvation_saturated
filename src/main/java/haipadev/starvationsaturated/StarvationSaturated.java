@@ -15,6 +15,6 @@ public class StarvationSaturated implements ModInitializer {
 		ModConfig.init();
 		ModConfigHelper.init();
 		HungerManagerHelper.init();
-		LOGGER.info("Starvation Saturated loaded");
+		LOGGER.info("Starvation Saturated loaded - saturate your starvation journey today");
 	}
 }

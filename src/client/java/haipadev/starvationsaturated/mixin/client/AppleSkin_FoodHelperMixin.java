@@ -11,16 +11,18 @@ import org.spongepowered.asm.mixin.injection.*;
 import squeek.appleskin.api.food.FoodValues;
 import squeek.appleskin.helpers.FoodHelper;
 
-@Mixin(value= FoodHelper.class,remap=false)
+@Mixin(value=FoodHelper.class,remap=false)
 public class AppleSkin_FoodHelperMixin {
     /**
      * @author haipadev
      * @reason Uncap saturation calculation from hunger
      */
     @Redirect(method = "getEstimatedHealthIncrement(Lnet/minecraft/item/ItemStack;Lsqueek/appleskin/api/food/FoodValues;Lnet/minecraft/entity/player/PlayerEntity;)F",
-            at = @At(value = "INVOKE", target = "Ljava/lang/Math;min(FF)F"),allow=1)
-    private static float starvationsaturated$uncapSaturationFromHunger(float a, float b, @Local HungerManager stats, @Local(argsOnly = true) FoodValues modifiedFoodValues) {
-        if(ModConfigHelper.INSTANCE.getCapSaturationToHunger(HungerManagerHelper.INSTANCE.getDifficulty())){return Math.min(a,b);}
+            at = @At(value = "INVOKE", target = "Ljava/lang/Math;min(FF)F"),allow=1,remap = true)
+    private static float starvationsaturated$uncapSaturationFromHunger(float a, float b) {
+        if (ModConfigHelper.INSTANCE.getCapSaturationToHunger(HungerManagerHelper.INSTANCE.getDifficulty())) {
+            return Math.min(a, b);
+        }
         return Math.min(a, ModConfigHelper.INSTANCE.getSaturationCapOnAdd(HungerManagerHelper.INSTANCE.getDifficulty()));
     }
 

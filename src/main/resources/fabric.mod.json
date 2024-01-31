@@ -9,10 +9,10 @@
 	],
 	"contact": {
 		"homepage": "https://haipadev.github.io",
-		"sources": "https://github.com/HyperGamesDev/starvation_saturated/",
+		"sources": "https://github.com/HaipaDev/starvation_saturated/",
 		"issues": "https://github.com/HaipaDev/starvation_saturated/issues"
 	},
-	"license": "CC0-1.0",
+	"license": "MIT License",
 	"icon": "assets/starvationsaturated/icon.png",
 	"environment": "*",
 	"entrypoints": {

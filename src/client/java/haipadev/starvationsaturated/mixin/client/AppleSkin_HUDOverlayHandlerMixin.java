@@ -13,7 +13,7 @@ import org.spongepowered.asm.mixin.injection.*;
 import squeek.appleskin.api.food.FoodValues;
 import squeek.appleskin.client.HUDOverlayHandler;
 
-@Mixin(value=HUDOverlayHandler.class,remap=false)
+@Mixin(value=HUDOverlayHandler.class)
 public class AppleSkin_HUDOverlayHandlerMixin {
     /**
      * @author haipadev

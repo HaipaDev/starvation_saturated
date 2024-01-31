@@ -8,7 +8,7 @@ import net.minecraft.world.Difficulty;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
-@Mixin(value= PlayerEntity.class,remap=false)
+@Mixin(PlayerEntity.class)
 public abstract class PlayerEntityMixin {
     /**
      * @author haipadev
