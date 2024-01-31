@@ -2,20 +2,17 @@ package haipadev.starvationsaturated.mixin;
 
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.llamalad7.mixinextras.sugar.Local;
-import com.terraformersmc.modmenu.util.mod.Mod;
 import haipadev.starvationsaturated.helpers.HungerManagerHelper;
 import haipadev.starvationsaturated.helpers.ModConfigHelper;
-import net.minecraft.entity.damage.DamageSource;
+import haipadev.starvationsaturated.ModConfig;
 import net.minecraft.entity.player.HungerManager;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.world.Difficulty;
-import org.apache.commons.lang3.builder.Diff;
 import org.spongepowered.asm.mixin.*;
 import org.spongepowered.asm.mixin.injection.*;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import haipadev.starvationsaturated.ModConfig;
 
-@Debug(export=true,print=true)
+//@Debug(export = true)
 @Mixin(HungerManager.class)
 public abstract class HungerManagerMixin {
 	@Shadow public abstract int getFoodLevel();
@@ -24,11 +21,8 @@ public abstract class HungerManagerMixin {
 	@Shadow private float saturationLevel;
 	@Shadow public abstract void setSaturationLevel(float saturationLevel);
 
-	@Unique
 	@Inject(method = "<init>",at=@At("TAIL"))
 	private void starvationsaturated$setStartHungerAndSaturation(CallbackInfo ci){
-//		this.foodLevel=ModConfig.INSTANCE.hungerStart;
-//		this.saturationLevel=ModConfig.INSTANCE.saturationStart;
 		this.foodLevel=ModConfigHelper.INSTANCE.getHungerStart(HungerManagerHelper.INSTANCE.getDifficulty());
 		this.saturationLevel=ModConfigHelper.INSTANCE.getSaturationStart(HungerManagerHelper.INSTANCE.getDifficulty());
 	}
@@ -42,35 +36,40 @@ public abstract class HungerManagerMixin {
 	private int starvationsaturated$modifyHunger(int a, int b, int food, float saturationModifier) {
 		return Math.max(
 				Math.min(food + this.getFoodLevel(), ModConfigHelper.INSTANCE.getHungerCapOnAdd(HungerManagerHelper.INSTANCE.getDifficulty()))
-				,0);
+		,0);
 	}
 
 	/**
 	 * @author haipadev
-	 * @reason Uncap saturation above hunger and don't let it go below 0
+	 * @reason Cap saturation accordingly to config and dont let it go below 0
 	 */
 	@Redirect(method = "add", at = @At(value = "INVOKE", target = "Ljava/lang/Math;min(FF)F"),allow=1)
 	private float starvationsaturated$modifySaturation(float a, float b, int food, float saturationModifier) {
 		float actualCap=ModConfigHelper.INSTANCE.getSaturationCapOnAdd(HungerManagerHelper.INSTANCE.getDifficulty());
-		if(ModConfigHelper.INSTANCE.getCapSaturationToHunger(HungerManagerHelper.INSTANCE.getDifficulty())){actualCap=food;}
+
+//		float cappedToHealthDif = Math.min(getSaturationLevel(), playerHealthDif);
+		if (ModConfigHelper.INSTANCE.getCapSaturationToMissingHealth(HungerManagerHelper.INSTANCE.getDifficulty())
+		) {
+			actualCap=Math.max(
+					playerHealthDif, ModConfigHelper.INSTANCE.getCapSaturationToMissingHealthOverride(HungerManagerHelper.INSTANCE.getDifficulty())
+			);
+		}
+
+		if(ModConfigHelper.INSTANCE.getCapSaturationToHunger(HungerManagerHelper.INSTANCE.getDifficulty())){actualCap=this.getFoodLevel();}
+		System.out.println(actualCap);
+
 		return Math.max(
 				Math.min(this.getSaturationLevel() + saturationModifier, actualCap)
-				, 0);
+		, 0);
 	}
 
-	/**
-	 * @author haipadev
-	 * @reason Limit saturation to player health difference
-	 */
+
+	/** Store playerHealthDif */
+	@Unique
+	float playerHealthDif;
 	@Inject(method = "update", at= @At("HEAD"))
-	private void starvationsaturated$capSaturationToMissingHealthMixin(PlayerEntity player, CallbackInfo ci){
-		if(ModConfigHelper.INSTANCE.getCapSaturationToMissingHealth(HungerManagerHelper.INSTANCE.getDifficulty())) {
-			float playerHealthDif=player.getMaxHealth()-player.getHealth();
-			setSaturationLevel(Math.max(
-					Math.min(getSaturationLevel(), playerHealthDif),
-					ModConfigHelper.INSTANCE.getCapSaturationToMissingHealthOverride(HungerManagerHelper.INSTANCE.getDifficulty())
-			));
-		}
+	private void starvationsaturated$getPlayerHealthDifference(PlayerEntity player, CallbackInfo ci){
+		this.playerHealthDif=player.getMaxHealth()-player.getHealth();
 	}
 
 	/**
@@ -160,13 +159,23 @@ public abstract class HungerManagerMixin {
 
 	/**
 	 * @author haipadev
+	 * @reason Set slow healing timer
+	 */
+	@ModifyExpressionValue(method = "update", at= @At(value = "CONSTANT", args = "intValue=80", ordinal=0), slice = @Slice(
+			from=@At(value= "INVOKE",target = "Lnet/minecraft/world/GameRules;getBoolean(Lnet/minecraft/world/GameRules$Key;)Z")
+	), allow=1)
+	private int starvationsaturated$setSlowHealTimer(int original, @Local Difficulty difficulty) {
+		return ModConfigHelper.INSTANCE.getHungerSlowHealRate(difficulty);
+	}
+	/**
+	 * @author haipadev
 	 * @reason Set healing timer
 	 */
 	@ModifyExpressionValue(method = "update", at= @At(value = "CONSTANT", args = "intValue=10"), slice = @Slice(
 			from=@At(value= "INVOKE",target = "Lnet/minecraft/world/GameRules;getBoolean(Lnet/minecraft/world/GameRules$Key;)Z")
 	), allow=1)
-	private int starvationsaturated$setRegenTimer(int original, @Local Difficulty difficulty) {
-		return ModConfigHelper.INSTANCE.getSaturationHealRate(difficulty);
+	private int starvationsaturated$setFastHealTimer(int original, @Local Difficulty difficulty) {
+		return ModConfigHelper.INSTANCE.getSaturationFastHealRate(difficulty);
 	}
 
 	/**

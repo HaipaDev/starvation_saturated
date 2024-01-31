@@ -12,7 +12,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import squeek.appleskin.api.food.FoodValues;
 import squeek.appleskin.client.TooltipOverlayHandler;
 
-@Debug(export = true)
 @Mixin(value= FoodValues.class, remap=false)
 public class AppleSkin_FoodValuesMixin {
     @Shadow

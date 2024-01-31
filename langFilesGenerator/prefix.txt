@@ -1,0 +1,3 @@
+    "text.autoconfig.starvationsaturated.title": "Starvation Saturated",
+    "text.autoconfig.starvationsaturated.option.enablePeacefulHunger": "Enable Peaceful Hunger",
+    "text.autoconfig.starvationsaturated.option.enablePeacefulHunger.@Tooltip": "Skip check for PEACEFUL that gives free hunger regeneration",

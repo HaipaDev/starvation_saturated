@@ -7,7 +7,6 @@ import org.spongepowered.asm.mixin.injection.*;
 
 import squeek.appleskin.client.TooltipOverlayHandler;
 
-@Debug(export = true)
 @Mixin(value=TooltipOverlayHandler.class,remap=false)
 public class AppleSkin_TooltipOverlayHandlerMixin {
     /**

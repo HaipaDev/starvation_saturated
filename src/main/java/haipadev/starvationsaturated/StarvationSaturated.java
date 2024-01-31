@@ -1,6 +1,7 @@
 package haipadev.starvationsaturated;
 
 import haipadev.starvationsaturated.helpers.HungerManagerHelper;
+import haipadev.starvationsaturated.ModConfig;
 import haipadev.starvationsaturated.helpers.ModConfigHelper;
 import net.fabricmc.api.ModInitializer;
 import org.slf4j.Logger;
