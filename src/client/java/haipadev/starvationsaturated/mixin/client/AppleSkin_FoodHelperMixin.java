@@ -1,14 +1,10 @@
 package haipadev.starvationsaturated.mixin.client;
 
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
-import com.llamalad7.mixinextras.sugar.Local;
 import haipadev.starvationsaturated.helpers.HungerManagerHelper;
 import haipadev.starvationsaturated.helpers.ModConfigHelper;
-import net.minecraft.entity.player.HungerManager;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.*;
-import squeek.appleskin.api.food.FoodValues;
 import squeek.appleskin.helpers.FoodHelper;
 
 @Mixin(value=FoodHelper.class,remap=false)

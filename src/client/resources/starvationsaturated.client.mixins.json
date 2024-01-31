@@ -3,6 +3,7 @@
 	"package": "haipadev.starvationsaturated.mixin.client",
 	"compatibilityLevel": "JAVA_17",
 	"client": [
+		"ClientPlayerEntityMixin",
 		"AppleSkin_TooltipOverlayHandlerMixin",
 		"AppleSkin_TooltipFoodOverlayMixin",
 		"AppleSkin_FoodValuesMixin",

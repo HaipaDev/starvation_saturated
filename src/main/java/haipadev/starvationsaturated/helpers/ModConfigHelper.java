@@ -279,6 +279,101 @@ public class ModConfigHelper {
         }else if(_debug){System.out.println("DIFFICULTY IS NULL");}
         return true;
     }
+    public int getHungerForSprint(Difficulty difficulty){
+        if(difficulty!=null) {
+            switch(difficulty){
+                case PEACEFUL -> {
+                    return ModConfig.INSTANCE.peacefulHungerValues.hungerForSprint;
+                }
+                case EASY -> {
+                    return ModConfig.INSTANCE.easyHungerValues.hungerForSprint;
+                }
+                case NORMAL -> {
+                    return ModConfig.INSTANCE.normalHungerValues.hungerForSprint;
+                }
+                case HARD -> {
+                    return ModConfig.INSTANCE.hardHungerValues.hungerForSprint;
+                }
+            }
+        }else if(_debug){System.out.println("DIFFICULTY IS NULL");}
+        return 6;
+    }
+    public float getSaturationForSprint(Difficulty difficulty){
+        if(difficulty!=null) {
+            switch(difficulty){
+                case PEACEFUL -> {
+                    return ModConfig.INSTANCE.peacefulHungerValues.saturationForSprint;
+                }
+                case EASY -> {
+                    return ModConfig.INSTANCE.easyHungerValues.saturationForSprint;
+                }
+                case NORMAL -> {
+                    return ModConfig.INSTANCE.normalHungerValues.saturationForSprint;
+                }
+                case HARD -> {
+                    return ModConfig.INSTANCE.hardHungerValues.saturationForSprint;
+                }
+            }
+        }else if(_debug){System.out.println("DIFFICULTY IS NULL");}
+        return 0;
+    }
+    public float getSprintExhaustion(Difficulty difficulty){
+        if(difficulty!=null) {
+            switch(difficulty){
+                case PEACEFUL -> {
+                    return ModConfig.INSTANCE.peacefulHungerValues.sprintExhaustion;
+                }
+                case EASY -> {
+                    return ModConfig.INSTANCE.easyHungerValues.sprintExhaustion;
+                }
+                case NORMAL -> {
+                    return ModConfig.INSTANCE.normalHungerValues.sprintExhaustion;
+                }
+                case HARD -> {
+                    return ModConfig.INSTANCE.hardHungerValues.sprintExhaustion;
+                }
+            }
+        }else if(_debug){System.out.println("DIFFICULTY IS NULL");}
+        return 0.1F;
+    }
+    public float getSprintJumpExhaustion(Difficulty difficulty){
+        if(difficulty!=null) {
+            switch(difficulty){
+                case PEACEFUL -> {
+                    return ModConfig.INSTANCE.peacefulHungerValues.sprintJumpExhaustion;
+                }
+                case EASY -> {
+                    return ModConfig.INSTANCE.easyHungerValues.sprintJumpExhaustion;
+                }
+                case NORMAL -> {
+                    return ModConfig.INSTANCE.normalHungerValues.sprintJumpExhaustion;
+                }
+                case HARD -> {
+                    return ModConfig.INSTANCE.hardHungerValues.sprintJumpExhaustion;
+                }
+            }
+        }else if(_debug){System.out.println("DIFFICULTY IS NULL");}
+        return 0.2F;
+    }
+    public float getJumpExhaustion(Difficulty difficulty){
+        if(difficulty!=null) {
+            switch(difficulty){
+                case PEACEFUL -> {
+                    return ModConfig.INSTANCE.peacefulHungerValues.jumpExhaustion;
+                }
+                case EASY -> {
+                    return ModConfig.INSTANCE.easyHungerValues.jumpExhaustion;
+                }
+                case NORMAL -> {
+                    return ModConfig.INSTANCE.normalHungerValues.jumpExhaustion;
+                }
+                case HARD -> {
+                    return ModConfig.INSTANCE.hardHungerValues.jumpExhaustion;
+                }
+            }
+        }else if(_debug){System.out.println("DIFFICULTY IS NULL");}
+        return 0.05F;
+    }
     public int getStarveDamage(Difficulty difficulty){
         if(difficulty!=null) {
             switch(difficulty) {

@@ -36,6 +36,11 @@ public class ModConfig implements ConfigData {
             .hungerSlowHealRate(80)
             .saturationFastHealRate(0)
             .tryTakeSaturationOnlyWhenHealing(true)
+            .hungerForSprint(7)
+            .saturationForSprint(0)
+            .sprintExhaustion(0.1F)
+            .sprintJumpExhaustion(0.2F)
+            .jumpExhaustion(0.05F)
             .starveDamage(1)
             .starveDamageRate(80)
             .dealStarveDamageTill(1)
@@ -56,6 +61,11 @@ public class ModConfig implements ConfigData {
             .hungerSlowHealRate(80)
             .saturationFastHealRate(0)
             .tryTakeSaturationOnlyWhenHealing(true)
+            .hungerForSprint(7)
+            .saturationForSprint(0)
+            .sprintExhaustion(0.15F)
+            .sprintJumpExhaustion(0.25F)
+            .jumpExhaustion(0.1F)
             .starveDamage(2)
             .starveDamageRate(80)
             .dealStarveDamageTill(0)
@@ -69,13 +79,18 @@ public class ModConfig implements ConfigData {
             .hungerCapOnAdd(20)
             .saturationCapOnAdd(20)
             .capSaturationToHunger(false)
-            .capSaturationToMissingHealth(true)
+            .capSaturationToMissingHealth(false)
             .capSaturationToMissingHealthOverride(0)
             .hungerSlowRegenOverride(99)
             .hungerFastRegenOverride(1)
             .hungerSlowHealRate(80)
             .saturationFastHealRate(0)
             .tryTakeSaturationOnlyWhenHealing(true)
+            .hungerForSprint(9)
+            .saturationForSprint(8)
+            .sprintExhaustion(0.5F)
+            .sprintJumpExhaustion(0.6F)
+            .jumpExhaustion(0.1F)
             .starveDamage(3)
             .starveDamageRate(80)
             .dealStarveDamageTill(0)
@@ -96,6 +111,11 @@ public class ModConfig implements ConfigData {
             .hungerSlowHealRate(80)
             .saturationFastHealRate(0)
             .tryTakeSaturationOnlyWhenHealing(true)
+            .hungerForSprint(13)
+            .saturationForSprint(0)
+            .sprintExhaustion(1F)
+            .sprintJumpExhaustion(1.2F)
+            .jumpExhaustion(0.1F)
             .starveDamage(4)
             .starveDamageRate(80)
             .dealStarveDamageTill(0)
@@ -130,6 +150,8 @@ public class ModConfig implements ConfigData {
         @ConfigEntry.Gui.Tooltip()
         @Comment("An override cap, letting saturation go above the difference of player health")
         public float capSaturationToMissingHealthOverride;
+
+        @ConfigEntry.Gui.PrefixText()
         @ConfigEntry.Gui.Tooltip()
         @Comment("Hunger level for slow regen [hunger based in vanilla] (99 is 'basically off', vanilla is 18)")
         public int hungerSlowRegenOverride;
@@ -146,6 +168,24 @@ public class ModConfig implements ConfigData {
         @Comment("('Try') Take saturation only when healing, other actions take hunger")
         public boolean tryTakeSaturationOnlyWhenHealing;
 
+        @ConfigEntry.Gui.PrefixText()
+        @ConfigEntry.Gui.Tooltip()
+        @Comment("Hunger required for sprint (set this to 99 or whatever to completely disable sprint, vanilla is 6 [but set to 5 because >= 5])")
+        public int hungerForSprint;
+        @ConfigEntry.Gui.Tooltip()
+        @Comment("Saturation level required to allow sprint")
+        public float saturationForSprint;
+        @ConfigEntry.Gui.Tooltip()
+        @Comment("Exhaustion take on sprint tick (vanilla is 0.1)")
+        public float sprintExhaustion;
+        @ConfigEntry.Gui.Tooltip()
+        @Comment("Exhaustion taken on a sprint jump (vanilla is 0.2)")
+        public float sprintJumpExhaustion;
+        @ConfigEntry.Gui.Tooltip()
+        @Comment("Exhaustion taken on jump (vanilla is 0.05)")
+        public float jumpExhaustion;
+
+        @ConfigEntry.Gui.PrefixText()
         @ConfigEntry.Gui.Tooltip()
         @Comment("How much starvation damage to deal")
         public int starveDamage;
@@ -233,6 +273,31 @@ public class ModConfig implements ConfigData {
 
             public Builder tryTakeSaturationOnlyWhenHealing(boolean tryTakeSaturationOnlyWhenHealing) {
                 values.tryTakeSaturationOnlyWhenHealing = tryTakeSaturationOnlyWhenHealing;
+                return this;
+            }
+
+            public Builder hungerForSprint(int hungerForSprint) {
+                values.hungerForSprint = hungerForSprint;
+                return this;
+            }
+
+            public Builder saturationForSprint(float saturationForSprint) {
+                values.saturationForSprint = saturationForSprint;
+                return this;
+            }
+
+            public Builder sprintJumpExhaustion(float sprintJumpExhaustion) {
+                values.sprintJumpExhaustion = sprintJumpExhaustion;
+                return this;
+            }
+
+            public Builder sprintExhaustion(float sprintExhaustion) {
+                values.sprintExhaustion = sprintExhaustion;
+                return this;
+            }
+
+            public Builder jumpExhaustion(float jumpExhaustion) {
+                values.jumpExhaustion = jumpExhaustion;
                 return this;
             }
 
