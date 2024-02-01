@@ -6,6 +6,8 @@ import me.shedaniel.autoconfig.annotation.Config;
 import me.shedaniel.autoconfig.annotation.ConfigEntry;
 import me.shedaniel.autoconfig.serializer.JanksonConfigSerializer;
 import me.shedaniel.cloth.clothconfig.shadowed.blue.endless.jankson.Comment;
+import me.shedaniel.autoconfig.ConfigHolder;
+import net.minecraft.util.ActionResult;
 
 @Config(name = "starvationsaturated")
 public class ModConfig implements ConfigData {
@@ -15,6 +17,16 @@ public class ModConfig implements ConfigData {
     public static void init() {
         AutoConfig.register(haipadev.starvationsaturated.ModConfig.class, JanksonConfigSerializer::new);
         INSTANCE = AutoConfig.getConfigHolder(haipadev.starvationsaturated.ModConfig.class).getConfig();
+        AutoConfig.getConfigHolder(haipadev.starvationsaturated.ModConfig.class).registerSaveListener((holder, data) -> onConfigSaved(holder));
+        AutoConfig.getConfigHolder(haipadev.starvationsaturated.ModConfig.class).registerLoadListener((holder, data) -> onConfigLoaded(holder));
+    }
+    private static ActionResult onConfigSaved(ConfigHolder<ModConfig> holder) {
+        ItemsRegistryModifier.iterateRegisteredItems();
+        return ActionResult.SUCCESS;
+    }
+    private static ActionResult onConfigLoaded(ConfigHolder<ModConfig> holder) {
+        ItemsRegistryModifier.iterateRegisteredItems();
+        return ActionResult.SUCCESS;
     }
 
     @ConfigEntry.Gui.Tooltip()
@@ -154,6 +166,11 @@ public class ModConfig implements ConfigData {
         @ConfigEntry.Gui.Tooltip()
         @Comment("Makes food instantly eaten like in Beta")
         public boolean isFoodInstaUse;
+        @ConfigEntry.BoundedDiscrete(min=0,max=64)
+        @Comment("An override value for *all* food items stack sizes (0 is vanilla)")
+        public int foodStackSizeOverride;
+
+        @ConfigEntry.Gui.PrefixText()
         @ConfigEntry.Gui.Tooltip()
         @Comment("The amount of hunger you start with on respawn")
         public int hungerStart;

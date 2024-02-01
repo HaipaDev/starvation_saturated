@@ -6,7 +6,8 @@
     "FoodComponentMixin",
     "HungerManagerMixin",
     "PlayerEntityMixin",
-    "ItemMixin"
+    "ItemMixin",
+    "ItemAccessor"
   ],
   "injectors": {
     "defaultRequire": 1

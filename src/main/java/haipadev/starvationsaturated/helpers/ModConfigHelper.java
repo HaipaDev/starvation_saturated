@@ -108,6 +108,25 @@ public class ModConfigHelper {
         }else if(_debug){System.out.println("DIFFICULTY IS NULL");}
         return false;
     }
+    public int getFoodStackSizeOverride(Difficulty difficulty){
+        if(difficulty!=null) {
+            switch (difficulty) {
+                case PEACEFUL -> {
+                    return ModConfig.INSTANCE.peacefulHungerValues.foodStackSizeOverride;
+                }
+                case EASY -> {
+                    return ModConfig.INSTANCE.easyHungerValues.foodStackSizeOverride;
+                }
+                case NORMAL -> {
+                    return ModConfig.INSTANCE.normalHungerValues.foodStackSizeOverride;
+                }
+                case HARD -> {
+                    return ModConfig.INSTANCE.hardHungerValues.foodStackSizeOverride;
+                }
+            }
+        }else if(_debug){System.out.println("DIFFICULTY IS NULL");}
+        return 0;//DONT OVERRIDE AT ALL
+    }
     public int getHungerStart(Difficulty difficulty){
         if(difficulty!=null) {
             switch (difficulty) {

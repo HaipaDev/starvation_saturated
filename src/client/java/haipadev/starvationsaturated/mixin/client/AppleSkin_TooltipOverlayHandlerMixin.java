@@ -26,7 +26,7 @@ public class AppleSkin_TooltipOverlayHandlerMixin {
     }
     @Unique
     private int getHungerBars(TooltipOverlayHandler.FoodOverlay foodOverlay){
-        return ((AppleSkin_TooltipFoodOverlayInterface)foodOverlay).getHungerBars();
+        return ((AppleSkin_TooltipFoodOverlayAccessor)foodOverlay).getHungerBars();
     }
 //    @Unique
 //    private boolean callShouldRenderHungerBars(TooltipOverlayHandler.FoodOverlay foodOverlay){

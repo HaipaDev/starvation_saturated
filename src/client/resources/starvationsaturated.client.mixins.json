@@ -7,7 +7,7 @@
 		"AppleSkin_TooltipOverlayHandlerMixin",
 		"AppleSkin_TooltipFoodOverlayMixin",
 		"AppleSkin_FoodValuesMixin",
-		"AppleSkin_TooltipFoodOverlayInterface",
+      "AppleSkin_TooltipFoodOverlayAccessor",
 		"AppleSkin_FoodHelperMixin",
 		"AppleSkin_HUDOverlayHandlerMixin"
 	],

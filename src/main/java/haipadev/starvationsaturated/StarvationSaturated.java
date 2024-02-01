@@ -12,6 +12,7 @@ public class StarvationSaturated implements ModInitializer {
 
 	@Override
 	public void onInitialize() {
+		ItemsRegistryModifier.init();
 		ModConfig.init();
 		ModConfigHelper.init();
 		HungerManagerHelper.init();
