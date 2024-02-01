@@ -24,6 +24,9 @@ public class ModConfig implements ConfigData {
     public DifficultyBasedHungerValues peacefulHungerValues = DifficultyBasedHungerValues.builder()
             .isFoodAlwaysEdible(true)
             .isFoodSnack(true)
+            .consumeDefaultTime(32)
+            .consumeSnackTime(16)
+            .isFoodInstaUse(true)
             .hungerStart(20)
             .saturationStart(5)
             .hungerCapOnAdd(20)
@@ -36,6 +39,7 @@ public class ModConfig implements ConfigData {
             .hungerSlowHealRate(80)
             .saturationFastHealRate(0)
             .tryTakeSaturationOnlyWhenHealing(true)
+            .tryTakeSaturationOnlyWhenSprinting(false)
             .hungerForSprint(7)
             .saturationForSprint(0)
             .sprintExhaustion(0.1F)
@@ -49,6 +53,9 @@ public class ModConfig implements ConfigData {
     public DifficultyBasedHungerValues easyHungerValues = DifficultyBasedHungerValues.builder()
             .isFoodAlwaysEdible(true)
             .isFoodSnack(true)
+            .consumeDefaultTime(32)
+            .consumeSnackTime(16)
+            .isFoodInstaUse(true)
             .hungerStart(20)
             .saturationStart(5)
             .hungerCapOnAdd(20)
@@ -61,6 +68,7 @@ public class ModConfig implements ConfigData {
             .hungerSlowHealRate(80)
             .saturationFastHealRate(0)
             .tryTakeSaturationOnlyWhenHealing(true)
+            .tryTakeSaturationOnlyWhenSprinting(false)
             .hungerForSprint(7)
             .saturationForSprint(0)
             .sprintExhaustion(0.15F)
@@ -74,6 +82,9 @@ public class ModConfig implements ConfigData {
     public DifficultyBasedHungerValues normalHungerValues = DifficultyBasedHungerValues.builder()
             .isFoodAlwaysEdible(true)
             .isFoodSnack(true)
+            .consumeDefaultTime(32)
+            .consumeSnackTime(16)
+            .isFoodInstaUse(false)
             .hungerStart(20)
             .saturationStart(0)
             .hungerCapOnAdd(20)
@@ -86,6 +97,7 @@ public class ModConfig implements ConfigData {
             .hungerSlowHealRate(80)
             .saturationFastHealRate(0)
             .tryTakeSaturationOnlyWhenHealing(true)
+            .tryTakeSaturationOnlyWhenSprinting(true)
             .hungerForSprint(9)
             .saturationForSprint(8)
             .sprintExhaustion(0.5F)
@@ -99,6 +111,9 @@ public class ModConfig implements ConfigData {
     public DifficultyBasedHungerValues hardHungerValues = DifficultyBasedHungerValues.builder()
             .isFoodAlwaysEdible(true)
             .isFoodSnack(false)
+            .consumeDefaultTime(36)
+            .consumeSnackTime(24)
+            .isFoodInstaUse(false)
             .hungerStart(18)
             .saturationStart(0)
             .hungerCapOnAdd(20)
@@ -111,6 +126,7 @@ public class ModConfig implements ConfigData {
             .hungerSlowHealRate(80)
             .saturationFastHealRate(0)
             .tryTakeSaturationOnlyWhenHealing(true)
+            .tryTakeSaturationOnlyWhenSprinting(true)
             .hungerForSprint(13)
             .saturationForSprint(0)
             .sprintExhaustion(1F)
@@ -124,11 +140,20 @@ public class ModConfig implements ConfigData {
 
     public static class DifficultyBasedHungerValues {
         @ConfigEntry.Gui.Tooltip()
-        @Comment("Allows you to eat food even when full")
+        @Comment("Allows you to eat *all* foods even when full")
         public boolean isFoodAlwaysEdible;
         @ConfigEntry.Gui.Tooltip()
-        @Comment("Makes food faster to eat")
+        @Comment("Makes *all* foods faster to eat")
         public boolean isFoodSnack;
+        @ConfigEntry.Gui.Tooltip()
+        @Comment("Amount of ticks it takes to eat a regular food (vanilla is 32)")
+        public int consumeDefaultTime;
+        @ConfigEntry.Gui.Tooltip()
+        @Comment("Amount of ticks it takes to eat a snack food (vanilla is 16)")
+        public int consumeSnackTime;
+        @ConfigEntry.Gui.Tooltip()
+        @Comment("Makes food instantly eaten like in Beta")
+        public boolean isFoodInstaUse;
         @ConfigEntry.Gui.Tooltip()
         @Comment("The amount of hunger you start with on respawn")
         public int hungerStart;
@@ -167,6 +192,10 @@ public class ModConfig implements ConfigData {
         @ConfigEntry.Gui.Tooltip()
         @Comment("('Try') Take saturation only when healing, other actions take hunger")
         public boolean tryTakeSaturationOnlyWhenHealing;
+        @ConfigEntry.Gui.PrefixText()
+        @ConfigEntry.Gui.Tooltip()
+        @Comment("('Try') Take saturation only when sprinting, other actions take hunger")
+        public boolean tryTakeSaturationOnlyWhenSprinting;
 
         @ConfigEntry.Gui.PrefixText()
         @ConfigEntry.Gui.Tooltip()
@@ -187,10 +216,10 @@ public class ModConfig implements ConfigData {
 
         @ConfigEntry.Gui.PrefixText()
         @ConfigEntry.Gui.Tooltip()
-        @Comment("How much starvation damage to deal")
+        @Comment("How much starvation damage to deal (vanilla is 1)")
         public int starveDamage;
         @ConfigEntry.Gui.Tooltip()
-        @Comment("How fast starvation damage occurs")
+        @Comment("How fast starvation damage occurs in tick (vanilla is 80)")
         public int starveDamageRate;
         @ConfigEntry.Gui.Tooltip()
         @Comment("How low should you get before starvation stops taking effect")
@@ -213,6 +242,21 @@ public class ModConfig implements ConfigData {
 
             public Builder isFoodSnack(boolean isFoodSnack) {
                 values.isFoodSnack = isFoodSnack;
+                return this;
+            }
+
+            public Builder consumeDefaultTime(int consumeDefaultTime) {
+                values.consumeDefaultTime = consumeDefaultTime;
+                return this;
+            }
+
+            public Builder consumeSnackTime(int consumeSnackTime) {
+                values.consumeSnackTime = consumeSnackTime;
+                return this;
+            }
+
+            public Builder isFoodInstaUse(boolean isFoodInstaUse) {
+                values.isFoodInstaUse = isFoodInstaUse;
                 return this;
             }
 
@@ -273,6 +317,10 @@ public class ModConfig implements ConfigData {
 
             public Builder tryTakeSaturationOnlyWhenHealing(boolean tryTakeSaturationOnlyWhenHealing) {
                 values.tryTakeSaturationOnlyWhenHealing = tryTakeSaturationOnlyWhenHealing;
+                return this;
+            }
+            public Builder tryTakeSaturationOnlyWhenSprinting(boolean tryTakeSaturationOnlyWhenSprinting) {
+                values.tryTakeSaturationOnlyWhenSprinting = tryTakeSaturationOnlyWhenSprinting;
                 return this;
             }
 

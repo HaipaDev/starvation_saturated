@@ -56,10 +56,15 @@ public abstract class HungerManagerMixin {
 		}
 
 		if(ModConfigHelper.INSTANCE.getCapSaturationToHunger(HungerManagerHelper.INSTANCE.getDifficulty())){actualCap=this.getFoodLevel();}
-		System.out.println(actualCap);
+//		System.out.println(actualCap);
 
-		return Math.max(
+		float saturation = Math.max(
 				Math.min(this.getSaturationLevel() + saturationModifier, actualCap)
+		, 0);
+
+		// Dont let saturation overflow if capSaturationToMissingHealthOverride is above it
+		return Math.max(
+				Math.min(saturation, ModConfigHelper.INSTANCE.getSaturationCapOnAdd(HungerManagerHelper.INSTANCE.getDifficulty()))
 		, 0);
 	}
 
@@ -191,6 +196,7 @@ public abstract class HungerManagerMixin {
 //		System.out.println("hp: "+player.getHealth()+" / "+player.getMaxHealth());
 		if(
 				(player.getHealth()<player.getMaxHealth() && ModConfigHelper.INSTANCE.getTryTakeSaturationOnlyWhenHealing(player.getWorld().getDifficulty()))
+				||(player.isSprinting() && ModConfigHelper.INSTANCE.getTryTakeSaturationOnlyWhenSprinting(player.getWorld().getDifficulty()))
 		){
 //			System.out.println("taking from saturation");
 			return 0.0F;

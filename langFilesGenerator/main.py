@@ -16,11 +16,17 @@ easy_text=template.replace("peacefulHungerValues","easyHungerValues").replace("P
 normal_text=template.replace("peacefulHungerValues","normalHungerValues").replace("Peaceful","Normal").replace("PEACEFUL","NORMAL").replace(" T(vanilla is 10)"," (vanilla is 1)")
 hard_text=template.replace("peacefulHungerValues","hardHungerValues").replace("Peaceful","Hard").replace("PEACEFUL","HARD").replace(" T(vanilla is 10)"," (vanilla is 0)")
 
+
 final_text = (
     "{\n"+
     f"{prefix}\n{peaceful_text}\n\n\n{easy_text}\n\n\n{normal_text}\n\n\n{hard_text}"+
     "}"
 ).replace(",}","\n}")
-with open("en_us.json","w") as final_file:
+
+filename="en_us.json"
+path="../src/main/resources/assets/starvationsaturated/lang/"
+# with open(filename,"w") as final_file:
+print(f"Generating lang file at: {path}{filename}")
+with open(path+filename,"w") as final_file:
     final_file.write(final_text)
     final_file.close()

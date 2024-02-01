@@ -49,7 +49,64 @@ public class ModConfigHelper {
                 }
             }
         }else if(_debug){System.out.println("DIFFICULTY IS NULL");}
-        return true;
+        return false;
+    }
+    public int getConsumeDefaultTime(Difficulty difficulty){
+        if(difficulty!=null) {
+            switch (difficulty) {
+                case PEACEFUL -> {
+                    return ModConfig.INSTANCE.peacefulHungerValues.consumeDefaultTime;
+                }
+                case EASY -> {
+                    return ModConfig.INSTANCE.easyHungerValues.consumeDefaultTime;
+                }
+                case NORMAL -> {
+                    return ModConfig.INSTANCE.normalHungerValues.consumeDefaultTime;
+                }
+                case HARD -> {
+                    return ModConfig.INSTANCE.hardHungerValues.consumeDefaultTime;
+                }
+            }
+        }else if(_debug){System.out.println("DIFFICULTY IS NULL");}
+        return 32;
+    }
+    public int getConsumeSnackTime(Difficulty difficulty){
+        if(difficulty!=null) {
+            switch (difficulty) {
+                case PEACEFUL -> {
+                    return ModConfig.INSTANCE.peacefulHungerValues.consumeSnackTime;
+                }
+                case EASY -> {
+                    return ModConfig.INSTANCE.easyHungerValues.consumeSnackTime;
+                }
+                case NORMAL -> {
+                    return ModConfig.INSTANCE.normalHungerValues.consumeSnackTime;
+                }
+                case HARD -> {
+                    return ModConfig.INSTANCE.hardHungerValues.consumeSnackTime;
+                }
+            }
+        }else if(_debug){System.out.println("DIFFICULTY IS NULL");}
+        return 16;
+    }
+    public boolean getIsFoodInstaUse(Difficulty difficulty){
+        if(difficulty!=null) {
+            switch (difficulty) {
+                case PEACEFUL -> {
+                    return ModConfig.INSTANCE.peacefulHungerValues.isFoodInstaUse;
+                }
+                case EASY -> {
+                    return ModConfig.INSTANCE.easyHungerValues.isFoodInstaUse;
+                }
+                case NORMAL -> {
+                    return ModConfig.INSTANCE.normalHungerValues.isFoodInstaUse;
+                }
+                case HARD -> {
+                    return ModConfig.INSTANCE.hardHungerValues.isFoodInstaUse;
+                }
+            }
+        }else if(_debug){System.out.println("DIFFICULTY IS NULL");}
+        return false;
     }
     public int getHungerStart(Difficulty difficulty){
         if(difficulty!=null) {
@@ -274,6 +331,25 @@ public class ModConfigHelper {
                 }
                 case HARD -> {
                     return ModConfig.INSTANCE.hardHungerValues.tryTakeSaturationOnlyWhenHealing;
+                }
+            }
+        }else if(_debug){System.out.println("DIFFICULTY IS NULL");}
+        return true;
+    }
+    public boolean getTryTakeSaturationOnlyWhenSprinting(Difficulty difficulty){
+        if(difficulty!=null) {
+            switch(difficulty){
+                case PEACEFUL -> {
+                    return ModConfig.INSTANCE.peacefulHungerValues.tryTakeSaturationOnlyWhenSprinting;
+                }
+                case EASY -> {
+                    return ModConfig.INSTANCE.easyHungerValues.tryTakeSaturationOnlyWhenSprinting;
+                }
+                case NORMAL -> {
+                    return ModConfig.INSTANCE.normalHungerValues.tryTakeSaturationOnlyWhenSprinting;
+                }
+                case HARD -> {
+                    return ModConfig.INSTANCE.hardHungerValues.tryTakeSaturationOnlyWhenSprinting;
                 }
             }
         }else if(_debug){System.out.println("DIFFICULTY IS NULL");}
