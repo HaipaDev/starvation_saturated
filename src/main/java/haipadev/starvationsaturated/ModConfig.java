@@ -7,12 +7,23 @@ import me.shedaniel.autoconfig.annotation.ConfigEntry;
 import me.shedaniel.autoconfig.serializer.JanksonConfigSerializer;
 import me.shedaniel.cloth.clothconfig.shadowed.blue.endless.jankson.Comment;
 import me.shedaniel.autoconfig.ConfigHolder;
+import me.shedaniel.clothconfig2.api.ConfigBuilder;
+import me.shedaniel.clothconfig2.api.ConfigCategory;
+import me.shedaniel.clothconfig2.api.ConfigEntryBuilder;
+import me.shedaniel.clothconfig2.api.ConfigScreen;
+import me.shedaniel.clothconfig2.gui.entries.DropdownBoxEntry;
+import me.shedaniel.clothconfig2.impl.builders.DropdownMenuBuilder;
+import net.minecraft.item.Item;
+import net.minecraft.item.Items;
+import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
 
 @Config(name = "starvationsaturated")
 public class ModConfig implements ConfigData {
     @ConfigEntry.Gui.Excluded
     public static haipadev.starvationsaturated.ModConfig INSTANCE;
+
+    public static Item configItem = Items.APPLE;
 
     public static void init() {
         AutoConfig.register(haipadev.starvationsaturated.ModConfig.class, JanksonConfigSerializer::new);
@@ -391,4 +402,45 @@ public class ModConfig implements ConfigData {
             return new Builder();
         }
     }
+//    public static ConfigScreen createConfigScreen() {
+//        ConfigBuilder builder = ConfigBuilder.create()
+//                .setTitle(Text.of("Mod Config"));
+//
+//        ConfigEntryBuilder entryBuilder = builder.entryBuilder();
+//
+//        // Dropdown menu for item selection
+////        DropdownMenuBuilder<Item> dropdownMenuBuilder = entryBuilder.startDropdownMenu("Select Item",
+////                        DropdownMenuBuilder.TopCellElementBuilder.ofItemObject(configItem),
+////                        DropdownMenuBuilder.CellCreatorBuilder.ofItemObject())
+////                .setDefaultValue(Items.APPLE)
+////                .setSelections(Registries.ITEM.stream().collect(Collectors.toSet()))
+////                .setSaveConsumer(item -> configItem = item)
+////                .build();
+////        ConfigEntryBuilder.EnumSelectorBuilder<Item> itemDropdownBuilder = entryBuilder.startEnumSelector("Select Item", Item.class, configItem);
+////        DropdownMenuBuilder<Item> itemDropdownBuilder = entryBuilder.startDropdownMenu("Select Item",
+////                DropdownBoxEntry.TopCellElementBuilder.ofItemObject(configItem),
+////                DropdownBoxEntry.CellCreatorBuilder.ofItemObject());
+////        DropdownMenuBuilder<Item> itemDropdownBuilder = entryBuilder.startDropdownMenu(Text.of("Select Item"),
+////                (DropdownBoxEntry.SelectionTopCellElement<Item>) DropdownBoxEntry.SelectionTopCellElement.(configItem, item -> item, item -> Text.of(item.getName())),
+////                (DropdownBoxEntry.SelectionCellCreator<Item>) DropdownBoxEntry.SelectionCellCreator(item -> Text.of(item.getName())));
+////        DropdownMenuBuilder<Item> itemDropdownBuilder = entryBuilder.startDropdownMenu(Text.of("Select Item"),
+////                DropdownBoxEntry.SelectionTopCellElement(configItem, item -> item, item -> Text.of(configItem.getName())),
+////                new DropdownBoxEntry.SelectionCellCreator(item -> configItem.getName()));
+//        DropdownBoxEntry.SelectionTopCellElement<Item> topCellElement=;
+//        DropdownBoxEntry.SelectionCellCreator<Item> cellCreator;
+//        DropdownMenuBuilder<Item> itemDropdownBuilder = new DropdownMenuBuilder<Item>(Text.of("Reset"), Text.of("Field"), topCellElement, cellCreator);
+//
+//
+//        itemDropdownBuilder
+//                .setDefaultValue(Items.APPLE)
+//                .setSaveConsumer(item -> configItem = item)
+//                .build();
+//
+//        // Other config entries can be added here using entryBuilder
+//
+//        ConfigCategory generalCategory = builder.getOrCreateCategory(Text.of("General"));
+//        generalCategory.addEntry(dropdownMenuBuilder);
+//
+//        return (ConfigScreen) builder.build();
+//    }
 }

@@ -1,6 +1,6 @@
 {
 	"schemaVersion": 1,
-	"id": "starvation-saturated",
+	"id": "starvationsaturated",
 	"version": "${version}",
 	"name": "Starvation Saturated",
 	"description": "Experience a totally saturated overhaul of the hunger system",

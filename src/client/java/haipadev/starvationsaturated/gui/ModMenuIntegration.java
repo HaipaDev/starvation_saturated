@@ -6,11 +6,12 @@ import me.shedaniel.autoconfig.AutoConfig;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import haipadev.starvationsaturated.ModConfig;
+import net.minecraft.client.MinecraftClient;
 
 public class ModMenuIntegration implements ModMenuApi {
-    @Override
-    public ConfigScreenFactory<?> getModConfigScreenFactory()
-    {
-        return parent -> AutoConfig.getConfigScreen(ModConfig.class, parent).get();
-    }
+//    @Override
+//    public ConfigScreenFactory<?> getModConfigScreenFactory(){
+////        return parent -> AutoConfig.getConfigScreen(ModConfig.class, parent).get();
+//        return parent -> new MyFirstScreen();
+//    }
 }

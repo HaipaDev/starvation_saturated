@@ -26,7 +26,7 @@ public class ItemsRegistryModifier {
             if(item.isFood()){
                 ItemValues itemValues = foodItemsValuesMap.getItemValues(item);
                 if (itemValues != null) {
-                    int stackSize=64;
+                    int stackSize;
                     if (ModConfigHelper.INSTANCE!=null && HungerManagerHelper.INSTANCE.getDifficulty()!=null &&
                             ModConfigHelper.INSTANCE.getFoodStackSizeOverride(HungerManagerHelper.INSTANCE.getDifficulty()) > 0) {
                         stackSize=ModConfigHelper.INSTANCE.getFoodStackSizeOverride(HungerManagerHelper.INSTANCE.getDifficulty());
