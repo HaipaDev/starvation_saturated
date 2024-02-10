@@ -21,9 +21,6 @@
 		],
 		"client": [
           "haipadev.starvationsaturated.StarvationSaturatedClient"
-		],
-		"modmenu": [
-          "haipadev.starvationsaturated.gui.ModMenuIntegration"
 		]
 	},
 	"mixins": [

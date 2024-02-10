@@ -8,9 +8,7 @@ public class HungerManagerHelper {
     }
     public static HungerManagerHelper INSTANCE;
     public static void init() {
-        if(INSTANCE==null) {
-            INSTANCE = new HungerManagerHelper();
-        }
+        if(INSTANCE==null){INSTANCE = new HungerManagerHelper();}
     }
     Difficulty difficulty;
     public Difficulty getDifficulty(){return difficulty;}

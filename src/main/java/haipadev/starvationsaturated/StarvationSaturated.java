@@ -8,6 +8,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import haipadev.starvationsaturated.ModConfigOwo;
 
+import java.util.HashMap;
+
 public class StarvationSaturated implements ModInitializer {
     public static final Logger LOGGER = LoggerFactory.getLogger("starvationsaturated");
 
@@ -15,9 +17,12 @@ public class StarvationSaturated implements ModInitializer {
 	@Override
 	public void onInitialize() {
 		ItemsRegistryModifier.init();
-//		ModConfig.init();
 		ModConfigHelper.init();
 		HungerManagerHelper.init();
+		if(StarvationSaturated.CONFIG.itemValues()==null){
+			System.out.println("Trying to set itemValues list");
+			StarvationSaturated.CONFIG.itemValues(ItemsRegistryModifier.SetModifiedFoodItemsValuesInitialMCRegistry().getAllItemValues());
+		}
 		LOGGER.info("Starvation Saturated loaded - saturate your starvation journey today");
 	}
 }

@@ -3,18 +3,12 @@ package haipadev.starvationsaturated.api;
 import net.minecraft.item.Item;
 
 public class ItemValues {
-    private final Item item;
     private final int unmodifiedStackSize;
     private int modifiedStackSize;
 
-    public ItemValues(Item item, int unmodifiedStackSize) {
-        this.item = item;
+    public ItemValues(int unmodifiedStackSize) {
         this.unmodifiedStackSize = unmodifiedStackSize;
         this.modifiedStackSize = unmodifiedStackSize;
-    }
-
-    public Item getItem() {
-        return item;
     }
 
     public int getUnmodifiedStackSize() {
@@ -22,10 +16,11 @@ public class ItemValues {
     }
 
     public int getModifiedStackSize() {
-        return unmodifiedStackSize;
+        return modifiedStackSize;
     }
 
     public void setModifiedStackSize(int modifiedStackSize) {
         this.modifiedStackSize = modifiedStackSize;
     }
 }
+

@@ -1,6 +1,7 @@
 package haipadev.starvationsaturated;
 
 import haipadev.starvationsaturated.helpers.ModConfigHelper;
+import io.wispforest.owo.config.ui.ConfigScreen;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.loader.api.FabricLoader;
@@ -11,6 +12,7 @@ public class StarvationSaturatedClient implements ClientModInitializer {
 	@Override
 	public void onInitializeClient() {
 		//ClientTickEvents.END_CLIENT_TICK.register(this::clientTick);
+		ConfigScreen.registerProvider("starvationsaturated", StarvationSaturatedConfigScreen::new);
 	}
 //
 //	private void clientTick(MinecraftClient client) {

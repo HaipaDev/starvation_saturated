@@ -28,17 +28,17 @@ public class ModConfig implements ConfigData {
     public static void init() {
         AutoConfig.register(haipadev.starvationsaturated.ModConfig.class, JanksonConfigSerializer::new);
         INSTANCE = AutoConfig.getConfigHolder(haipadev.starvationsaturated.ModConfig.class).getConfig();
-        AutoConfig.getConfigHolder(haipadev.starvationsaturated.ModConfig.class).registerSaveListener((holder, data) -> onConfigSaved(holder));
-        AutoConfig.getConfigHolder(haipadev.starvationsaturated.ModConfig.class).registerLoadListener((holder, data) -> onConfigLoaded(holder));
+//        AutoConfig.getConfigHolder(haipadev.starvationsaturated.ModConfig.class).registerSaveListener((holder, data) -> onConfigSaved(holder));
+//        AutoConfig.getConfigHolder(haipadev.starvationsaturated.ModConfig.class).registerLoadListener((holder, data) -> onConfigLoaded(holder));
     }
-    private static ActionResult onConfigSaved(ConfigHolder<ModConfig> holder) {
-        ItemsRegistryModifier.iterateRegisteredItems();
-        return ActionResult.SUCCESS;
-    }
-    private static ActionResult onConfigLoaded(ConfigHolder<ModConfig> holder) {
-        ItemsRegistryModifier.iterateRegisteredItems();
-        return ActionResult.SUCCESS;
-    }
+//    private static ActionResult onConfigSaved(ConfigHolder<ModConfig> holder) {
+//        ItemsRegistryModifier.iterateRegisteredItems();
+//        return ActionResult.SUCCESS;
+//    }
+//    private static ActionResult onConfigLoaded(ConfigHolder<ModConfig> holder) {
+//        ItemsRegistryModifier.iterateRegisteredItems();
+//        return ActionResult.SUCCESS;
+//    }
 
     @ConfigEntry.Gui.Tooltip()
     @Comment("Skip check for PEACEFUL that gives free hunger regeneration")
@@ -79,7 +79,7 @@ public class ModConfig implements ConfigData {
             .consumeDefaultTime(32)
             .consumeSnackTime(16)
             .isFoodInstaUse(true)
-            .hungerStart(20)
+            .hungerStart(16)
             .saturationStart(5)
             .hungerCapOnAdd(20)
             .saturationCapOnAdd(20)
@@ -108,7 +108,7 @@ public class ModConfig implements ConfigData {
             .consumeDefaultTime(32)
             .consumeSnackTime(16)
             .isFoodInstaUse(false)
-            .hungerStart(20)
+            .hungerStart(13)
             .saturationStart(0)
             .hungerCapOnAdd(20)
             .saturationCapOnAdd(20)
@@ -137,7 +137,7 @@ public class ModConfig implements ConfigData {
             .consumeDefaultTime(36)
             .consumeSnackTime(24)
             .isFoodInstaUse(false)
-            .hungerStart(18)
+            .hungerStart(10)
             .saturationStart(0)
             .hungerCapOnAdd(20)
             .saturationCapOnAdd(20)

@@ -1,7 +1,8 @@
 package haipadev.starvationsaturated;
 
-import haipadev.starvationsaturated.helpers.HungerManagerHelper;
-import haipadev.starvationsaturated.helpers.ModConfigHelper;
+import haipadev.starvationsaturated.ModConfigOwo;
+import haipadev.starvationsaturated.api.ModifiedItemValues;
+import haipadev.starvationsaturated.api.ModifiedItemValuesMap;
 import haipadev.starvationsaturated.mixin.ItemAccessor;
 import haipadev.starvationsaturated.api.ItemValues;
 import haipadev.starvationsaturated.api.ItemValuesMap;
@@ -9,35 +10,65 @@ import net.minecraft.item.Item;
 import net.minecraft.registry.Registries;
 import net.minecraft.util.Identifier;
 
+import java.util.Map;
+
 public class ItemsRegistryModifier {
-    private static final ItemValuesMap foodItemsValuesMap = new ItemValuesMap();
+    public ItemsRegistryModifier() {
+    }
+
+    public static ItemsRegistryModifier INSTANCE;
+    public static final ItemValuesMap foodItemsValuesMap = new ItemValuesMap();
+    public static ModifiedItemValuesMap modifiedItemValuesMap = new ModifiedItemValuesMap();
+
     public static void init() {
+        if (INSTANCE == null) {
+            INSTANCE = new ItemsRegistryModifier();
+        }
+        iterateMinecraftRegistry();
+        System.out.println("Food Item Values Map setup.");
+    }
+
+    public static void iterateMinecraftRegistry() {
         for (Identifier itemId : Registries.ITEM.getIds()) {
             Item item = Registries.ITEM.get(itemId);
-            if (item.isFood()) {
-                int unmodifiedStackSize = item.getMaxCount();
-                foodItemsValuesMap.addItem(item, unmodifiedStackSize);
+            if(item.isFood()){
+                foodItemsValuesMap.addItemValues(itemId,item.getMaxCount());
+                modifiedItemValuesMap.addItemValues(itemId,item.getMaxCount());
             }
         }
     }
+
     public static void iterateRegisteredItems() {
-        for(Identifier itemId : Registries.ITEM.getIds()) {
+        for (Map.Entry<Identifier, ItemValues> entry : foodItemsValuesMap.getAllItemValues().entrySet()) {
+            Identifier itemId = entry.getKey();
             Item item = Registries.ITEM.get(itemId);
-            if(item.isFood()){
-                ItemValues itemValues = foodItemsValuesMap.getItemValues(item);
-                if (itemValues != null) {
-                    int stackSize;
-                    if (ModConfigHelper.INSTANCE!=null && HungerManagerHelper.INSTANCE.getDifficulty()!=null &&
-                            ModConfigHelper.INSTANCE.getFoodStackSizeOverride(HungerManagerHelper.INSTANCE.getDifficulty()) > 0) {
-                        stackSize=ModConfigHelper.INSTANCE.getFoodStackSizeOverride(HungerManagerHelper.INSTANCE.getDifficulty());
-                        itemValues.setModifiedStackSize(stackSize);
-                    }else{
-                        stackSize=itemValues.getUnmodifiedStackSize();
-                    }
-                    ((ItemAccessor)item).setMaxCount(stackSize);
-//                    System.out.println("default: "+itemValues.getUnmodifiedStackSize()+" | cur: "+stackSize);
-                }
-            }
+            ItemValues foodItemsValues = entry.getValue();
+            System.out.println("Item: "+item.getTranslationKey()+" | Modified Stack Size: " + foodItemsValues.getModifiedStackSize());
+            ((ItemAccessor) item).setMaxCount(foodItemsValues.getModifiedStackSize());
         }
+    }
+
+    public static void applyModifiedValuesToMap() {
+        for (Map.Entry<Identifier, ModifiedItemValues> entry : modifiedItemValuesMap.getAllItemValues().entrySet()) {
+            Identifier itemId=entry.getKey();
+            ModifiedItemValues modifiedItemValues = entry.getValue();
+            ItemValues itemValues = foodItemsValuesMap.getItemValues(itemId);
+            itemValues.setModifiedStackSize(modifiedItemValues.modifiedStackSize());
+        }
+//        StarvationSaturated.CONFIG.subscribeToItemValues();
+    }
+
+    public static ModifiedItemValuesMap SetModifiedFoodItemsValuesMap(ModifiedItemValuesMap valuesMap) {
+        modifiedItemValuesMap=valuesMap;
+        return modifiedItemValuesMap;
+    }
+
+    public static ModifiedItemValuesMap SetModifiedFoodItemsValuesInitialMCRegistry() {
+        iterateMinecraftRegistry();
+        return modifiedItemValuesMap;
+    }
+
+    public static ModifiedItemValuesMap GetModifiedFoodItemsValuesMap(ModifiedItemValuesMap valuesMap) {
+        return modifiedItemValuesMap;
     }
 }

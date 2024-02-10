@@ -1,13 +1,18 @@
 package haipadev.starvationsaturated;
 
 import blue.endless.jankson.Comment;
-import io.wispforest.owo.config.annotation.Config;
-import io.wispforest.owo.config.annotation.Modmenu;
-import io.wispforest.owo.config.annotation.Nest;
-import io.wispforest.owo.config.annotation.SectionHeader;
+import haipadev.starvationsaturated.api.ItemValues;
+import haipadev.starvationsaturated.api.ModifiedItemValues;
+import haipadev.starvationsaturated.api.ModifiedItemValuesMap;
+import io.wispforest.owo.config.annotation.*;
+import net.minecraft.item.Item;
+import net.minecraft.util.Identifier;
+
+import java.util.HashMap;
+import java.util.Map;
 
 //@Modmenu(modId = "starvationsaturated")
-@Modmenu(modId = "starvationsaturated", uiModelId = "my_ui_model")
+//@Modmenu(modId = "starvationsaturated", uiModelId = "starvationsaturated:my_ui_model")
 @Config(name = "starvationsaturated", wrapperName = "ModConfigOwo")
 public class ModConfigModelOwo {
     @Comment("test")
@@ -22,6 +27,9 @@ public class ModConfigModelOwo {
 
     @Nest
     public ThisIsNested nestedObject = new ThisIsNested();
+    @SectionHeader("itemValues")
+    @Hook
+    public Map<Identifier, ModifiedItemValues> itemValues=null;// = ItemsRegistryModifier.foodItemsValuesMap.getAllItemValues();
 
     public static class ThisIsNested {
         public boolean aNestedValue = false;
