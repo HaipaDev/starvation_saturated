@@ -7,10 +7,18 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ModifiedItemValuesMap {
-    private final Map<Identifier, ModifiedItemValues> itemValuesMap = new HashMap<>();
+    private final Map<Identifier, ModifiedItemValues> itemValuesMap;
 
-    public void addItemValues(Identifier itemId, int unmodifiedStackSize) {
-        ModifiedItemValues itemValues = new ModifiedItemValues(unmodifiedStackSize);
+    public ModifiedItemValuesMap(Map<Identifier, ModifiedItemValues> itemValuesMap) {
+        this.itemValuesMap = new HashMap<>(itemValuesMap);
+    }
+
+    public ModifiedItemValuesMap() {
+        this.itemValuesMap = new HashMap<>();
+    }
+
+    public void addItemValues(Identifier itemId, int modifiedStackSize) {
+        ModifiedItemValues itemValues = new ModifiedItemValues(modifiedStackSize);
         itemValuesMap.put(itemId, itemValues);
     }
 

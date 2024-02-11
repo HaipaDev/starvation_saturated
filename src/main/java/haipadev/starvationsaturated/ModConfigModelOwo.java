@@ -29,7 +29,7 @@ public class ModConfigModelOwo {
     public ThisIsNested nestedObject = new ThisIsNested();
     @SectionHeader("itemValues")
     @Hook
-    public Map<Identifier, ModifiedItemValues> itemValues=null;// = ItemsRegistryModifier.foodItemsValuesMap.getAllItemValues();
+    public Map<Identifier, ModifiedItemValues> itemValues=null;
 
     public static class ThisIsNested {
         public boolean aNestedValue = false;

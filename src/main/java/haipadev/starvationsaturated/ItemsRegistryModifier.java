@@ -25,6 +25,9 @@ public class ItemsRegistryModifier {
             INSTANCE = new ItemsRegistryModifier();
         }
         iterateMinecraftRegistry();
+        SetupDefaultModifications();
+        applyModifiedValuesToMap();
+        iterateFoodValuesMap();
         System.out.println("Food Item Values Map setup.");
     }
 
@@ -37,17 +40,30 @@ public class ItemsRegistryModifier {
             }
         }
     }
+    public static void SetupDefaultModifications(){
+        SetModifiedFoodItemValues("minecraft:potato",1);
+    }
 
-    public static void iterateRegisteredItems() {
+    public static void iterateFoodValuesMap() {
         for (Map.Entry<Identifier, ItemValues> entry : foodItemsValuesMap.getAllItemValues().entrySet()) {
             Identifier itemId = entry.getKey();
             Item item = Registries.ITEM.get(itemId);
             ItemValues foodItemsValues = entry.getValue();
-            System.out.println("Item: "+item.getTranslationKey()+" | Modified Stack Size: " + foodItemsValues.getModifiedStackSize());
+            System.out.println(itemId+" | Modified Stack Size: " + foodItemsValues.getModifiedStackSize());
             ((ItemAccessor) item).setMaxCount(foodItemsValues.getModifiedStackSize());
         }
     }
 
+    public static void applyModifiedValuesFromConfig() {
+        if(StarvationSaturated.CONFIG.itemValues()!=null){
+            if(!StarvationSaturated.CONFIG.itemValues().isEmpty()){
+                System.out.println("SETTING MODIFIED FOOD VALUES MAP FROM CONFIG");
+                modifiedItemValuesMap = new ModifiedItemValuesMap(StarvationSaturated.CONFIG.itemValues());
+            }
+        }
+        applyModifiedValuesToMap();
+        iterateFoodValuesMap();
+    }
     public static void applyModifiedValuesToMap() {
         for (Map.Entry<Identifier, ModifiedItemValues> entry : modifiedItemValuesMap.getAllItemValues().entrySet()) {
             Identifier itemId=entry.getKey();
@@ -55,7 +71,6 @@ public class ItemsRegistryModifier {
             ItemValues itemValues = foodItemsValuesMap.getItemValues(itemId);
             itemValues.setModifiedStackSize(modifiedItemValues.modifiedStackSize());
         }
-//        StarvationSaturated.CONFIG.subscribeToItemValues();
     }
 
     public static ModifiedItemValuesMap SetModifiedFoodItemsValuesMap(ModifiedItemValuesMap valuesMap) {
@@ -70,5 +85,12 @@ public class ItemsRegistryModifier {
 
     public static ModifiedItemValuesMap GetModifiedFoodItemsValuesMap(ModifiedItemValuesMap valuesMap) {
         return modifiedItemValuesMap;
+    }
+    public static void SetModifiedFoodItemValues(String id, int stackSize){
+        if(modifiedItemValuesMap.getItemValues(Identifier.of(id.split(":")[0],id.split(":")[1]))!=null){
+            modifiedItemValuesMap.getItemValues(Identifier.of(id.split(":")[0],id.split(":")[1])).setModifiedStackSize(stackSize);
+        }else{
+            modifiedItemValuesMap.addItemValues(Identifier.of(id.split(":")[0],id.split(":")[1]),stackSize);
+        }
     }
 }
